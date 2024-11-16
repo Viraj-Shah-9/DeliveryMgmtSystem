@@ -1,4 +1,5 @@
 const Partner = require("../models/Partner");
+const mongoose = require('mongoose');
 
 module.exports = {
   // Get all partners

@@ -166,9 +166,11 @@ module.exports = {
       partner.metrics.cancelledOrders += 1;
       await partner.save();
 
-      const assignment = await Assignment.findOne({ orderId: id });
-      assignment.status = "failed";
-      await assignment.save();
+      if (await Assignment.findOne({ orderId: id })) {
+        const assignment = await Assignment.findOne({ orderId: id });
+        assignment.status = "failed";
+        await assignment.save();
+      }
 
       await Order.findByIdAndDelete(id);
       res.redirect("/api/orders");
