@@ -1,0 +1,107 @@
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .container{
+      flex: 1;
+  }
+  
+  /* navbar */
+  .navbar {
+    height: 5rem;
+    background-color: #ffff;
+  }
+  
+  .fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+  }
+  
+  .nav-link {
+    color: #222222 !important;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .nav-link {
+    color: black !important;
+    font-weight: bold;
+    margin-right: 20px;
+    font-size: 1.1rem;
+  }
+  
+  .nav-link:hover {
+    color: #fe424d !important;
+  }
+  
+  
+  /* cards */
+  .listing-card{
+      border: none !important;
+      margin-bottom: 3rem;
+      margin-right: 0.35rem;
+  }
+  
+  .card-body{
+      padding: 0% !important ;
+  }
+  
+  .card-text{
+      font-weight: 400 !important;
+  }
+  
+  .listing-link{
+      text-decoration: none;
+  }
+  
+  
+  .add-btn, .edit-btn{
+      background-color: #fe424d !important;
+      color: white !important;
+      border : none !important;
+  }
+  
+  .show-btns{
+      margin-top: -20px;
+      display: flex;
+  }
+  
+
+  @media (max-width: 768px) {
+    .navbar {
+      height: auto;
+    }
+  
+    .navbar-nav {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+  
+    .nav-link {
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+  }
+  
+  /* For smaller screens like mobile */
+  @media (max-width: 480px) {
+    .navbar-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+    }
+  
+    .nav-link {
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+  }

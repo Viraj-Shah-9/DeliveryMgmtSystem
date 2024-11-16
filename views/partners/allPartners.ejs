@@ -1,0 +1,49 @@
+<% layout("/layouts/boilerplate") %>
+
+<body style="overflow-y: scroll; height: 1200px;">
+    <form action="/api/addPartner">
+        <button class="btn btn-outline-dark mt-4"><i class="fa-solid fa-plus"></i>  Add Partner</button>
+    </form>
+    
+    <div class="row row-cols-lg-2 row-cols-md-2 row-cols-sm-1 mt-3 g-4">
+        <% for(partner of allPartners) { %>
+            <div class="col">
+                <div class="card partner-card h-100">
+                    <div class="card-body p-3">
+                        <h5 class="card-title"><b><%= partner.name %></b></h5>
+                        <hr>
+                        <p class="card-text">
+                            <b>Partner Details</b> <br>
+                            <b>Email:</b> <%= partner.email %> <br>
+                            <b>Phone:</b> <%= partner.phone %> <br>
+                            <b>Status:</b> <%= partner.status.charAt(0).toUpperCase() + partner.status.slice(1) %> <br>
+                            <b>Current load:</b> <%= partner.currentLoad %> <br>
+                            <b>Service Areas:</b> <%= partner.areas.join(", ") || 'N/A' %> <br>
+                            <b>Shift:</b> <%= partner.shift.start %> - <%= partner.shift.end %> <br>
+                        </p>
+
+                        <hr>
+
+                        <p class="card-text">
+                            <b>Performance Metrics</b> <br>
+                            <b>Rating:</b> <%= partner.metrics.rating.toFixed(1) %> <br>
+                            <b>Completed Orders:</b> <%= partner.metrics.completedOrders %> <br>
+                            <b>Cancelled Orders:</b> <%= partner.metrics.cancelledOrders %> <br>
+                        </p>
+
+                        <hr>
+
+                        <div class="d-flex mt-3">
+                            <form action="/api/partner/<%= partner._id %>" method="get" class="me-2">
+                                <button class="btn btn-dark add-btn">Edit</button>
+                            </form>
+                            <form action="/api/partner/<%= partner._id %>?_method=DELETE" method="post">
+                                <button class="btn btn-outline-dark">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</body>

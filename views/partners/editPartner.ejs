@@ -1,0 +1,73 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <div class="col-6 offset-3">
+        <h3>Edit Partner Details</h3>
+        <form method="post" action="/api/partner/<%= partner._id %>?_method=PUT">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" value="<%= partner.name %>" class="form-control" required/>
+                <div class="invalid-feedback">Name is mandatory</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" value="<%= partner.email %>" class="form-control" required/>
+                <div class="invalid-feedback">Valid email is required</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" name="phone" value="<%= partner.phone %>" class="form-control" required/>
+                <div class="invalid-feedback">Phone number is mandatory</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select name="status" class="form-control" required>
+                    <option value="active" <%= partner.status === 'active' ? 'selected' : '' %>>Active</option>
+                    <option value="inactive" <%= partner.status === 'inactive' ? 'selected' : '' %>>Inactive</option>
+                </select>
+                <div class="invalid-feedback">Status is mandatory</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="areas" class="form-label">Areas</label>
+                <input type="text" name="areas" value="<%= partner.areas?.join(', ') || '' %>" class="form-control" required/>
+                <div class="invalid-feedback">At least one area is required</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="shift_start" class="form-label">Shift Start</label>
+                <input type="time" name="shift_start" value="<%= partner.shift.start %>" class="form-control" required/>
+                <div class="invalid-feedback">Shift start time is required</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="shift_end" class="form-label">Shift End</label>
+                <input type="time" name="shift_end" value="<%= partner.shift.end %>" class="form-control" required/>
+                <div class="invalid-feedback">Shift end time is required</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="rating" class="form-label">Rating</label>
+                <input type="number" name="rating" step="0.1" max="5" value="<%= partner.metrics?.rating || 0%>" class="form-control" required/>
+                <div class="invalid-feedback">Rating must be between 0 and 5</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="completedOrders" class="form-label">Completed Orders</label>
+                <input type="number" name="completedOrders" value="<%= partner.metrics?.completedOrders || 0 %>" class="form-control" required/>
+                <div class="invalid-feedback">Completed orders count is required</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="cancelledOrders" class="form-label">Cancelled Orders</label>
+                <input type="number" name="cancelledOrders" value="<%= partner.metrics?.cancelledOrders || 0 %>" class="form-control" required/>
+                <div class="invalid-feedback">Cancelled orders count is required</div>
+            </div>
+
+            <button class="btn btn-dark edit-btn mt-2 mb-3">Update Partner</button>
+        </form>
+    </div>
+</div>

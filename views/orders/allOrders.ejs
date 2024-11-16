@@ -1,0 +1,62 @@
+<% layout("/layouts/boilerplate") %>
+
+<body style="overflow-y: scroll; height: 1400px;">
+    <form action="/api/orders/assign">
+        <button class="btn btn-outline-dark mt-4"><i class="fa-solid fa-plus"></i>  Add Order</button>
+    </form>
+
+    <div class="row row-cols-lg-2 row-cols-md-2 row-cols-sm-1 mt-3 g-4">
+        <% for(order of allOrders) { %>
+            <div class="col">
+                <div class="card order-card h-100">
+                    <div class="card-body p-3">
+                        <h5 class="card-title"><b>Order Number: <%= order.orderNumber %></b></h5>
+                        <hr>
+                        <p class="card-text">
+                            <b>Customer Details</b> <br>
+                            <b>Name:</b> <%= order.customer.name %> <br>
+                            <b>Phone:</b> <%= order.customer.phone %> <br>
+                            <b>Address:</b> <%= order.customer.address %> <br>
+                        </p>
+
+                        <hr>
+
+                        <p class="card-text">
+                            <b>Order Details</b> <br>
+                            <b>Area:</b> <%= order.area %> <br>
+                            <b>Status:</b> <u> <%= order.status.charAt(0).toUpperCase() + order.status.slice(1) %> </u>  <br>
+                            <b>Scheduled For:</b> <%= order.scheduledFor %> <br>
+                            <b>Assigned to:</b> <%= order.assignedTo ? order.assignedTo.name : 'Not Assigned' %> <br>
+                        </p>
+
+                        <hr>
+
+                        <p class="card-text">
+                            <b>Order Items</b> <br>
+                            <% order.items.forEach(function(item) { %>
+                                <b><%= item.name %>:</b> <%= item.quantity %> x ₹<%= item.price.toFixed(2) %> <br>
+                            <% }) %>
+                        </p>
+
+                        <hr>
+
+                        <p class="card-text">
+                            <b>Total Amount:</b> ₹<%= order.totalAmount.toFixed(2) %> <br>
+                        </p>
+
+                        <hr>
+
+                        <div class="d-flex mt-3">
+                            <form action="/api/orders/<%= order._id %>/status" method="get" class="me-2">
+                                <button class="btn btn-dark edit-btn">Edit Status</button>
+                            </form>
+                            <form action="/api/orders/<%= order._id %>/status?_method=DELETE" method="post" class="me-2">
+                                <button class="btn btn-outline-dark">Cancel Order</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</body>

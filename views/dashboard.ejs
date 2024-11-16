@@ -1,0 +1,147 @@
+<% layout("/layouts/boilerplate") %>
+
+    <style>
+        .card.metrics-card {
+            position: relative;
+            height: 270px;
+            overflow-y: scroll;
+            /* Enable scroll behavior */
+        }
+
+        .card.metrics-card::-webkit-scrollbar {
+            width: 0px;
+            /* Hide scrollbar */
+            background: transparent;
+            /* Optional: makes the scrollbar area transparent */
+        }
+
+        .card.metrics-card {
+            -ms-overflow-style: none;
+            /* For Internet Explorer */
+            scrollbar-width: none;
+            /* For Firefox */
+        }
+    </style>
+
+    <body>
+        <div class="row row-cols-lg-2 row-cols-md-2 row-cols-sm-1 mt-3 g-4">
+            <div class="col">
+                <div class="card metrics-card p-3" style="height: 270px; overflow-y: scroll;">
+                    <div class="card-title">
+                        <h3 class="text-center">Key Metrics Card</h3>
+                        <hr>
+                    </div>
+
+                    <div class="card-body p-3">
+                        <ol>
+                            <% for(partner of partners) { %>
+                                <li>
+                                    <h6>Partner Name: <i>
+                                            <%= partner.name %>
+                                        </i></h6>
+                                    <p class="card-text">
+                                        (<b>Ratings: </b>
+                                        <%= partner.metrics.rating %>★,&nbsp;&nbsp;&nbsp;
+                                            <b>Completed Orders:</b>
+                                            <%= partner.metrics.completedOrders %>,&nbsp;&nbsp;&nbsp;
+                                                <b>Cancelled Orders:</b>
+                                                <%= partner.metrics.cancelledOrders %>)
+                                    </p>
+                                </li>
+                                <hr>
+                                <% } %>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="card metrics-card p-3" style="height: 270px; overflow-y: scroll;">
+                    <div class="card-title">
+                        <h3 class="text-center">Active Orders Map</h3>
+                        <hr>
+                    </div>
+                    <div class="card-body p-3">
+                        <ol>
+                            <% for(order of orders) { %>
+                                <li>
+                                    <h6><b>Order Number: </b>
+                                        <%= order.orderNumber %>
+                                    </h6>
+                                    <p class="card-text">
+                                        <b>Customer :</b>
+                                        <%= order.customer.name %><br>
+                                            <b>Address:</b>
+                                            <%= order.customer.address %>
+                                                <b>Scheduled Time:</b>
+                                                <%= order.scheduledFor %><br>
+                                                    <b>Assigned to:</b>
+                                                    <%= order.assignedTo.name%>
+                                    </p>
+                                </li>
+                                <hr>
+                                <% } %>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card metrics-card p-3" style="height: 270px; overflow-y: scroll;">
+                    <div class="card-title">
+                        <h3 class="text-center">Partner availability Status</h3>
+                        <hr>
+                    </div>
+                    <div class="card-body p-3">
+                        <h5>Active Partners</h5>
+                        <ol>
+                            <% for(partner of partners) { %>
+                                <% if(partner.status=="active" ) { %>
+                                    <li>
+                                        <%= partner.name %>
+                                    </li>
+                                    <% } %>
+                                        <% } %>
+                        </ol>
+
+                        <h5>Inactive Partners</h5>
+                        <ol>
+                            <% for(partner of partners) { %>
+                                <% if(partner.status=="inactive" ) { %>
+                                    <li>
+                                        <%= partner.name %>
+                                    </li>
+                                    <% } %>
+                                        <% } %>
+                        </ol>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card metrics-card p-3" style="height: 270px; overflow-y: scroll;">
+                    <div class="card-title">
+                        <h3 class="text-center">Recent Assignments</h3>
+                        <hr>
+                    </div>
+                    <div class="card-body p-3">
+                        <ol>
+                            <% for(assignment of assignments) { %>
+                                <li>
+                                    <h6><b>Order Number: </b>
+                                        <%= assignment.orderId.orderNumber %>
+                                    </h6>
+                                    <h6><b>Order Status: </b>
+                                        <%= assignment.status %>
+                                    </h6>
+                                </li>
+                                <hr>
+                                <% } %>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>

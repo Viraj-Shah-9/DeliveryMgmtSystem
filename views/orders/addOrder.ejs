@@ -1,0 +1,87 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <div class="col-6 offset-3">
+        <h3>Create New Order</h3>
+        <form action="/api/orders/assign" method="post">
+            <div class="mb-3">
+                <label for="orderNumber" class="form-label">Order Number</label>
+                <input type="text" class="form-control" id="orderNumber" name="orderNumber" required>
+              </div>
+        
+              <!-- Customer Information -->
+              <div class="mb-3">
+                <label for="customerName" class="form-label">Customer Name</label>
+                <input type="text" class="form-control" id="customerName" name="customer[name]" required>
+              </div>
+        
+              <div class="mb-3">
+                <label for="customerPhone" class="form-label">Customer Phone</label>
+                <input type="tel" class="form-control" id="customerPhone" name="customer[phone]" required>
+              </div>
+        
+              <div class="mb-3">
+                <label for="customerAddress" class="form-label">Customer Address</label>
+                <input type="text" class="form-control" id="customerAddress" name="customer[address]" required>
+              </div>
+        
+              <!-- Area -->
+              <div class="mb-3">
+                <label for="area" class="form-label">Area</label>
+                <input type="text" class="form-control" id="area" name="area" required>
+              </div>
+        
+              <!-- Items -->
+              <div class="mb-3">
+                <label for="items" class="form-label">Items</label>
+                <div id="itemContainer">
+                  <div class="mb-2" class="item-row">
+                    <input type="text" class="form-control mb-2" name="items[0][name]" placeholder="Item Name" required>
+                    <input type="number" class="form-control mb-2" name="items[0][quantity]" placeholder="Quantity" required>
+                    <input type="number" class="form-control mb-2" name="items[0][price]" placeholder="Price" required>
+                  </div>
+                </div>
+                <button type="button" id="addItemBtn" class="btn btn-secondary">Add More Item</button>
+              </div>
+        
+              <!-- Status -->
+              <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-control" id="status" name="status" required>
+                  <option value="pending">Pending</option>
+                  <option value="assigned">Assigned</option>
+                  <option value="picked">Picked</option>
+                  <option value="delivered">Delivered</option>
+                </select>
+              </div>
+        
+              <!-- Scheduled Time -->
+              <div class="mb-3">
+                <label for="scheduledFor" class="form-label">Scheduled For (HH:mm)</label>
+                <input type="time" class="form-control" id="scheduledFor" name="scheduledFor" required>
+              </div>        
+
+            <!-- Partner (Dropdown) -->
+            <div class="mb-3">
+                <label for="partner" class="form-label">Assigned to </label>
+                <select name="assignedTo" class="form-select" required>
+                    <option value="" disabled selected>Select Partner</option>
+                    <!-- Loop through partners and display each name -->
+                    <% partners.forEach(function(partner) { %>
+                        <option value="<%= partner._id %>"><%= partner.name %></option>
+                    <% }) %>
+                </select>
+                <div class="invalid-feedback">Partner selection is mandatory</div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="mb-3">
+                <label for="totalAmount" class="form-label">Total Amount</label>
+                <input type="number" class="form-control" id="totalAmount" name="totalAmount" required>
+              </div>
+        
+            <!-- Submit Button -->
+            <button class="btn btn-dark add-btn mt-2 mb-3">Add Order</button>
+        </form>
+    </div>
+</div>

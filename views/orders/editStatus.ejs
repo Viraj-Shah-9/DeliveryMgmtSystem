@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <div class="col-6 offset-3">
+        <h3>Edit Order Details</h3>
+        <form method="post" action="/api/orders/<%= order._id %>/status?_method=PUT">
+            
+            <!-- Order Number -->
+            <div class="mb-3">
+                <label for="orderNumber" class="form-label">Order Number</label>
+                <input type="text" name="orderNumber" value="<%= order.orderNumber %>" class="form-control" required/>
+                <div class="invalid-feedback">Order Number is mandatory</div>
+            </div>
+
+            <!-- Customer Details -->
+            <div class="mb-3">
+                <label for="customer_name" class="form-label">Customer Name</label>
+                <input type="text" name="customer_name" value="<%= order.customer.name %>" class="form-control" required/>
+                <div class="invalid-feedback">Customer name is mandatory</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="assignedTo" class="form-label">Assigned to</label>
+                <input type="text" name="assignedTo" value="<%= order.assignedTo.name %>" class="form-control" required/>
+                <div class="invalid-feedback">Partner selection is mandatory</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select name="status" class="form-control" required>
+                    <option value="pending" <%= order.status === 'pending' ? 'selected' : '' %>>Pending</option>
+                    <option value="assigned" <%= order.status === 'assigned' ? 'selected' : '' %>>Assigned</option>
+                    <option value="picked" <%= order.status === 'picked' ? 'selected' : '' %>>Picked</option>
+                    <option value="delivered" <%= order.status === 'delivered' ? 'selected' : '' %>>Delivered</option>
+                </select>
+                <div class="invalid-feedback">Status is mandatory</div>
+            </div>
+            
+            <button class="btn btn-dark edit-btn mt-2 mb-3">Update Order</button>
+        </form>
+    </div>
+</div>
